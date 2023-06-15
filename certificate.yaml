@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: lafia-cert
+spec:
+  secretName: lafia-cert-secret
+  dnsNames:
+      - lafia-cms.cloakio.dev
+      - lafia-backend-service.cloakio.dev
+      - fhir-server.cloakio.dev
+      - suresalama-cms.cloakio.dev
+      - suresalama-backend.cloakio.dev
+      - openhim-console.cloakio.dev
+      - lafia-dhis2.cloakio.dev
+      - ant-media.cloakio.dev
+      - suresalama-cms.cloakio.dev
+      - suresalama-backend.cloakio.dev
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer

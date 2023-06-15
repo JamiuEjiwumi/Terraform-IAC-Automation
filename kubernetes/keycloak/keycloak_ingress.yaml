@@ -1,0 +1,24 @@
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: keycloak
+#   annotations:
+#     kubernetes.io/ingress.class: "nginx"
+#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+
+# spec:
+#   tls:
+#     - hosts:
+#       - keycloak.cloakio.dev
+#       secretName: keycloak-tls
+#   rules:
+#   - host: "keycloak.cloakio.dev"
+#     http:
+#       paths:
+#       - pathType: Prefix
+#         path: "/"
+#         backend:
+#           service:
+#             name: keycloak
+#             port:
+#               number: 8080

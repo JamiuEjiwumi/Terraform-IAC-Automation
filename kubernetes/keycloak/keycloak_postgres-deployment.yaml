@@ -1,0 +1,43 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: keycloak-postgres
+# spec:
+#   selector:
+#     matchLabels:
+#       app: keycloak-postgres
+#   template:
+#     metadata:
+#       labels:
+#         app: keycloak-postgres
+#     spec:
+#       serviceAccountName: postgres-service-account
+#       securityContext:
+#         runAsUser: 999
+#         fsGroup: 999
+#       containers:
+#       - name: postgres
+#         image: postgres:13-alpine
+#         env:
+#         - name: POSTGRES_USER
+#           valueFrom:
+#             secretKeyRef:
+#               name: keycloak-postgres-credentials
+#               key: POSTGRES_USER
+#         - name: POSTGRES_PASSWORD
+#           valueFrom:
+#             secretKeyRef:
+#               name: keycloak-postgres-credentials
+#               key: POSTGRES_PASSWORD
+#         - name: POSTGRES_DB
+#           value: keycloak
+#         ports:
+#         - containerPort: 5432
+#           name: postgres
+#         volumeMounts:
+#         - name: keycloak-postgres-storage
+#           mountPath: /var/lib/postgresql/data
+#       volumes:
+#       - name: keycloak-postgres-storage
+#         persistentVolumeClaim:
+#           claimName: data
